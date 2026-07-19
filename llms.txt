@@ -1,0 +1,32 @@
+# Allergen & Diet Guard
+
+> Allergen & Diet Guard to nowoczesna, prywatna i bezpłatna aplikacja dla systemu Android służąca do skanowania kodów kreskowych produktów spożywczych oraz automatycznego weryfikowania obecności alergenów, śladowych zanieczyszczeń (traces) i zgodności z wybraną dietą (wegańska, wegetariańska, bezglutenowa).
+
+## Kluczowe Informacje
+- **Strona domowa**: https://apkmasondev.github.io/AllergenGuard/
+- **Repozytorium GitHub**: https://github.com/apkmasondev/AllergenGuard.git
+- **Pobieranie APK**: https://github.com/apkmasondev/AllergenGuard/releases/download/v1.0.0/AllergenGuard_MVP.apk
+- **Platforma**: Android 8.0+ (Jetpack Compose, Kotlin, Single Activity, Hilt, Room DB)
+- **Licencja**: Open Source
+
+## Główne Funkcje i Wyróżniki
+1. **100% Prywatności i Działanie Offline**:
+   Wszystkie dane profilowe użytkownika (wybrane alergeny, wykluczenia diety, cele kaloryczne) oraz pełna historia skanów są przechowywane wyłącznie w lokalnej bazie danych Room na telefonie użytkownika. Aplikacja nie wymaga zakładania konta i nie wysyła żadnych danych profilowych na zewnątrz.
+
+2. **Brak Zgadywania Bezpieczeństwa (Jawny stan UNKNOWN)**:
+   W przypadku gdy dane w otwartej bazie Open Food Facts są niepełne lub brakuje im zweryfikowanych tagów diety, aplikacja wyraźnie prezentuje status UNKNOWN, ostrzegając użytkownika o braku wystarczających danych etykiety zamiast fałszywie klasyfikować produkt jako bezpieczny.
+
+3. **Google Code Scanner bez Uprawnień Kamery**:
+   Aplikacja wykorzystuje ML Kit Barcode Scanning API udostępniane przez Google Play Services. Pozwala to na skanowanie kodów EAN/UPC bez konieczności przyznawania aplikacji uprawnień `CAMERA`.
+
+4. **Makroskładniki i Bilans Kaloryczny**:
+   Wizualizacja zawartości węglowodanów, białek i tłuszczów w postaci animowanych okręgów na 100g oraz obliczanie udziału energii w indywidualnie wyznaczonym celu kalorycznym (1000–4000 kcal).
+
+5. **Historia i Ulubione**:
+   Możliwość oznaczania najczęściej skanowanych produktów oraz przeszukiwania lokalnej bazy skanów po nazwie lub kodzie EAN.
+
+## Dokumentacja Techniczna
+- **Architektura**: Clean Architecture + MVVM (UI Layer -> Domain Layer -> Data Layer)
+- **UI**: Jetpack Compose z Single-Activity architecture oraz Compose Navigation
+- **Baza danych**: Room Database z jawnymi migracjami
+- **Sieć**: Retrofit + OkHttp + Kotlinx Serialization (komunikacja z Open Food Facts API)

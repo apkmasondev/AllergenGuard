@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allergen & Diet Guard — Bezpieczne odżywianie pod kontrolą</title>
+  <meta name="description" content="Allergen & Diet Guard to nowoczesna aplikacja Android do skanowania kodów kreskowych, analizy alergenów, diety i makroskładników. 100% prywatności i lokalna baza danych.">
+  <meta name="keywords" content="alergeny, dieta, skanowanie kodów, weganizm, bezglutenowe, Open Food Facts, Android, Jetpack Compose, prywatność">
+  <meta name="author" content="apkmasondev">
+  <meta name="theme-color" content="#0d1117">
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="styles.css" as="style">
+  <link rel="preload" href="assets/Screenshot_20260719_204500_AllergenGuard.webp" as="image">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apkmasondev.github.io/AllergenGuard/">
+  <meta property="og:title" content="Allergen & Diet Guard — Twój Osobisty Strażnik Diety">
+  <meta property="og:description" content="Skanuj kody kreskowe, sprawdzaj alergeny i ślady śladowe, analizuj makroskładniki bez wysyłania danych na zewnątrz.">
+  <meta property="og:image" content="https://apkmasondev.github.io/AllergenGuard/assets/Screenshot_20260719_204500_AllergenGuard.webp">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Allergen & Diet Guard — Bezpieczne Skanowanie Żywności">
+  <meta name="twitter:description" content="100% Prywatności. Brak zgadywania bezpieczeństwa. Analiza alergenów, diet i makroskładników w Twoim telefonie.">
+  <meta name="twitter:image" content="https://apkmasondev.github.io/AllergenGuard/assets/Screenshot_20260719_204500_AllergenGuard.webp">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Allergen & Diet Guard",
+    "operatingSystem": "Android",
+    "applicationCategory": "HealthApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "PLN"
+    },
+    "description": "Aplikacja Android porównująca dane produktów spożywczych z lokalnym profilem alergenów i diety użytkownika. 100% offline i pełna prywatność.",
+    "downloadUrl": "https://github.com/apkmasondev/AllergenGuard/releases/download/v1.0.0/AllergenGuard_MVP.apk",
+    "softwareVersion": "1.0.0",
+    "author": {
+      "@type": "Organization",
+      "name": "apkmasondev"
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Header Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <span class="logo-shield">🛡️</span>
+        <span class="brand-title">Allergen <span class="brand-accent">&</span> Diet Guard</span>
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="#symulator" class="nav-link">Symulator EAN</a>
+        <a href="#funkcje" class="nav-link">Funkcje</a>
+        <a href="#galeria" class="nav-link">Galeria</a>
+        <a href="#prywatnosc" class="nav-link">Prywatność</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeToggle" class="btn-icon" aria-label="Zmień motyw">🌙</button>
+        <a href="https://github.com/apkmasondev/AllergenGuard.git" class="btn btn-outline nav-btn" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/apkmasondev/AllergenGuard/releases/download/v1.0.0/AllergenGuard_MVP.apk" class="btn btn-primary nav-btn">Pobierz APK</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-dot"></span> 100% Offline Profile & Room DB
+          </div>
+          <h1 class="hero-title">Twoja Dieta. Twoje Alergie. <span class="text-gradient">Zero Zgadywania.</span></h1>
+          <p class="hero-description">
+            Skanuj kody kreskowe produktów spożywczych i błyskawicznie sprawdzaj obecność alergenów, śladów produkcyjnych oraz zgodność z dietą wegańską lub bezglutenową. Dane profilu i historia pozostają wyłącznie na Twoim telefonie.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="https://github.com/apkmasondev/AllergenGuard/releases/download/v1.0.0/AllergenGuard_MVP.apk" class="btn btn-primary btn-hero">
+              <span class="btn-icon">📥</span> Pobierz APK (Android)
+            </a>
+            <a href="https://github.com/apkmasondev/AllergenGuard.git" class="btn btn-secondary btn-hero" target="_blank" rel="noopener">
+              <span class="btn-icon">⚡</span> Zobacz Kod na GitHub
+            </a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-value">0%</span>
+              <span class="metric-label">Śledzenia & Rejestracji</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">0</span>
+              <span class="metric-label">Uprawnień do Kamery (ML Kit)</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">Lokalny Cache Room</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="device-frame">
+            <div class="screen-glow"></div>
+            <img src="assets/Screenshot_20260719_204500_AllergenGuard.webp" alt="Ekran analizy produktu w aplikacji Allergen Guard" class="device-screen" width="360" height="780">
+            <div class="floating-tag tag-safe">
+              <span class="tag-icon">✅</span>
+              <div>
+                <strong>Status SAFE</strong>
+                <small>Brak wykrytych alergenów</small>
+              </div>
+            </div>
+            <div class="floating-tag tag-macro">
+              <span class="tag-icon">📊</span>
+              <div>
+                <strong>Makroskładniki</strong>
+                <small>Węglowodany, Białka, Tłuszcze</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive EAN Scanner Simulator -->
+    <section id="symulator" class="simulator-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-tag">Wypróbuj bez instalacji</span>
+          <h2 class="section-title">Interaktywny Symulator Skanera EAN</h2>
+          <p class="section-subtitle">
+            Zdefiniuj testowy profil użytkownika i zobacz, jak algorytm Allergen & Diet Guard wylicza werdykt w czasie rzeczywistym.
+          </p>
+        </div>
+
+        <div class="simulator-grid">
+          <!-- Simulator Controls Left -->
+          <div class="sim-panel sim-config">
+            <h3>1. Skonfiguruj Twój Profil</h3>
+
+            <div class="sim-group">
+              <label class="sim-label">Wybierz Alergeny:</label>
+              <div class="sim-chips" id="allergenChips">
+                <button type="button" class="chip active" data-allergen="nuts">🥜 Orzechy</button>
+                <button type="button" class="chip active" data-allergen="milk">🥛 Laktoza / Mleko</button>
+                <button type="button" class="chip" data-allergen="gluten">🌾 Gluten</button>
+                <button type="button" class="chip" data-allergen="soy">🫘 Soja</button>
+              </div>
+            </div>
+
+            <div class="sim-group">
+              <label class="sim-label">Wybierz Dietę:</label>
+
+              <div class="sim-radio-group">
+                <label class="radio-card">
+                  <input type="radio" name="simDiet" value="none">
+                  <span>Brak diety</span>
+                </label>
+                <label class="radio-card active">
+                  <input type="radio" name="simDiet" value="vegan" checked>
+                  <span>🌱 Wegańska</span>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="simDiet" value="vegetarian">
+                  <span>🧀 Wegetariańska</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="sim-group">
+              <label class="sim-label">Cel Kaloryczny: <span id="calVal">2200 kcal</span></label>
+              <input type="range" id="simCalRange" min="1000" max="4000" value="2200" step="100">
+            </div>
+
+            <h3>2. Wybierz Produkt do Skanu</h3>
+            <div class="product-selector">
+              <button type="button" class="prod-card active" data-prod="chocolate">
+                <span class="prod-emoji">🍫</span>
+                <div>
+                  <strong>Czekolada z Orzechami</strong>
+                  <small>EAN: 590000000101</small>
+                </div>
+              </button>
+              <button type="button" class="prod-card" data-prod="oatmilk">
+                <span class="prod-emoji">🥛</span>
+                <div>
+                  <strong>Napój Owsiany Bio</strong>
+                  <small>EAN: 590000000202</small>
+                </div>
+              </button>
+              <button type="button" class="prod-card" data-prod="cookies">
+                <span class="prod-emoji">🍪</span>
+                <div>
+                  <strong>Ciastka "Tajemnicza Receptura"</strong>
+                  <small>EAN: 590000000303 (Brak tagów)</small>
+                </div>
+              </button>
+            </div>
+
+            <button id="btnRunSim" class="btn btn-primary btn-full">
+              <span class="btn-icon">⚡</span> Symuluj Skanowanie EAN
+            </button>
+          </div>
+
+          <!-- Simulator Screen Right -->
+          <div class="sim-panel sim-display">
+            <div class="scanner-viewport">
+              <div class="scan-laser" id="scanLaser"></div>
+              <div class="scan-frame-corners"></div>
+
+              <!-- Result Overlay -->
+              <div id="simResult" class="sim-result-card result-danger">
+                <div class="status-header">
+                  <span id="resBadge" class="status-pill pill-danger">🚨 DANGER</span>
+                  <span id="resEan" class="ean-code">590000000101</span>
+                </div>
+                <h4 id="resTitle" class="res-product-title">Czekolada z Orzechami</h4>
+                <p id="resReason" class="res-reason">Wykryto Orzechy Laskowe oraz śladowe ilości mleka!</p>
+
+                <!-- Macro circles demo -->
+                <div class="macro-row">
+                  <div class="macro-circle">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path id="carbCircle" class="circle circle-carb" stroke-dasharray="45, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <span id="carbVal" class="macro-text">45g</span>
+                    <small>Węgle</small>
+                  </div>
+                  <div class="macro-circle">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path id="protCircle" class="circle circle-prot" stroke-dasharray="12, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <span id="protVal" class="macro-text">12g</span>
+                    <small>Białko</small>
+                  </div>
+                  <div class="macro-circle">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path id="fatCircle" class="circle circle-fat" stroke-dasharray="35, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <span id="fatVal" class="macro-text">35g</span>
+                    <small>Tłuszcz</small>
+                  </div>
+                </div>
+
+                <div class="energy-bar-wrap">
+                  <div class="energy-info">
+                    <span>Energia (540 kcal / 100g)</span>
+                    <strong id="calShare">24.5% celu</strong>
+                  </div>
+                  <div class="progress-track">
+                    <div id="calBar" class="progress-fill" style="width: 24.5%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Distinguishers Section -->
+    <section id="funkcje" class="features-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-tag">Dlaczego Allergen Guard?</span>
+          <h2 class="section-title">Technologia w Służbie Zdrowia i Prywatności</h2>
+          <p class="section-subtitle">Stworzona w Kotlinie i Jetpack Compose z myślą o pełnym bezpieczeństwie danych.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-emerald">
+              <span>🔒</span>
+            </div>
+            <h3>100% Prywatności i Local Room</h3>
+            <p>
+              Wszystkie Twoje dane profilowe, wybrane alergeny, cele diety i historia skanów pozostają wyłącznie na urządzeniu. Brak jakichkolwiek serwerów śledzących.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-amber">
+              <span>⚠️</span>
+            </div>
+            <h3>Zero ZgadywaniaSkładu</h3>
+            <p>
+              Jeśli w bazie Open Food Facts brakuje informacji wymaganych przez Twoją dietę, aplikacja jawnie wyświetla stan <strong>UNKNOWN</strong> zamiast fałszywego bezpieczeństwa.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-cyan">
+              <span>📷</span>
+            </div>
+            <h3>Skaner Bez Uprawnień Kamery</h3>
+            <p>
+              Wykorzystanie Google Code Scanner API (Google Play Services) eliminuje potrzebę nadawania uprawnienia <code>CAMERA</code> w telefonie.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-purple">
+              <span>🎯</span>
+            </div>
+            <h3>Wartości Odżywcze & Cele Kcal</h3>
+            <p>
+              Prezentacja makroskładników w postaci okręgów oraz wyliczanie procentowego udziału w Twoim dziennym celu kalorycznym (1000 – 4000 kcal).
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-rose">
+              <span>⚡</span>
+            </div>
+            <h3>Szybki Cache Offline</h3>
+            <p>
+              Raz pobrane produkty spożywcze są zapamiętywane lokalnie w bazie Room, umożliwiając błyskawiczny przegląd historii nawet bez dostępu do sieci.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper icon-blue">
+              <span>⭐</span>
+            </div>
+            <h3>Ulubione i Filtrowanie</h3>
+            <p>
+              Oznaczaj najczęstsze produkty jako ulubione i błyskawicznie wyszukuj wpisy w historii po kodzie EAN lub nazwie.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real App Screenshots Gallery -->
+    <section id="galeria" class="gallery-section">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-tag">Zrzuty Ekranu</span>
+          <h2 class="section-title">Interfejs Zaprojektowany z Precyzją</h2>
+          <p class="section-subtitle">Nowoczesny, przejrzysty design w stylu Glassmorphism i wsparciem trybu ciemnego oraz jasnego.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="assets/Screenshot_20260719_204500_AllergenGuard.webp" alt="Status SAFE - Wynik analizy" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Ekran Wyniku — Status SAFE</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/Screenshot_20260719_204507_AllergenGuard.webp" alt="Status DANGER - Ostrzeżenie o alergenie" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Ekran Wyniku — Status DANGER</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/Screenshot_20260719_204512_AllergenGuard.webp" alt="Ekran Skanera EAN" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Ekran Skanera EAN</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/Screenshot_20260719_204520_AllergenGuard.webp" alt="Profil Użytkownika i Alergeny" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Profil i Alergeny</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/Screenshot_20260719_204526_AllergenGuard.webp" alt="Konfiguracja Diety i Celu Kalorycznego" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Dieta & Cel Kaloryczny</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/Screenshot_20260719_204532_AllergenGuard.webp" alt="Lokalna Historia Skanów" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Historia & Ulubione</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy Commitment Banner -->
+    <section id="prywatnosc" class="privacy-banner-section">
+      <div class="section-container">
+        <div class="privacy-card">
+          <div class="privacy-content">
+            <h2>Twoje Dane Zdrowotne Należą Do Ciebie</h2>
+            <p>
+              Nie wymagamy zakładać konta, nie prosimy o podanie adresu e-mail i nie zbieramy danych o Twoich alergiach. Wszystko przetwarza Twoje własne urządzenie.
+            </p>
+          </div>
+          <div class="privacy-shield-visual">
+            🛡️
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Banner CTA -->
+    <section class="download-cta-section">
+      <div class="section-container text-center">
+        <h2>Zadbaj o Swoje Bezpieczeństwo Żywieniowe Już Dziś</h2>
+        <p>Pobierz darmowy plik APK dla systemu Android i przejmij kontrolę nad składem produktów.</p>
+        <div class="cta-buttons-flex">
+          <a href="https://github.com/apkmasondev/AllergenGuard/releases/download/v1.0.0/AllergenGuard_MVP.apk" class="btn btn-primary btn-large">
+            <span>📥</span> Pobierz Allergen Guard APK
+          </a>
+          <a href="https://github.com/apkmasondev/AllergenGuard.git" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
+            <span>⚡</span> Repozytorium GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">🛡️ Allergen & Diet Guard</span>
+        <p>Bezpieczne skanowanie produktów z Open Food Facts.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/apkmasondev/AllergenGuard.git" target="_blank" rel="noopener">GitHub</a>
+        <a href="llms.txt" target="_blank">AI Metadata (llms.txt)</a>
+        <a href="robots.txt" target="_blank">Robots.txt</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Allergen & Diet Guard. Licencja Open Source.</p>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="app.js" defer></script>
+</body>
+</html>
