@@ -1,15 +1,38 @@
 /* ==========================================================================
    Allergen & Diet Guard — Interactive Landing Page JS (Vanilla ES6)
+   Audited against AGENTS-landing-page.md 2026-07-19
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Theme Toggle Logic
+
+  // ---- Mobile Hamburger Menu ----
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    // Close menu on link click (mobile UX)
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // ---- Theme Toggle ----
   const themeToggle = document.getElementById('themeToggle');
   const currentTheme = localStorage.getItem('theme') || 'dark';
+  const heroImg = document.getElementById('heroImage');
 
   if (currentTheme === 'light') {
     document.documentElement.setAttribute('data-theme', 'light');
     themeToggle.textContent = '☀️';
+    if (heroImg) heroImg.src = 'assets/screen1_light.webp';
   }
 
   themeToggle.addEventListener('click', () => {
@@ -18,14 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
       document.documentElement.removeAttribute('data-theme');
       localStorage.setItem('theme', 'dark');
       themeToggle.textContent = '🌙';
+      if (heroImg) heroImg.src = 'assets/screen1.webp';
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
       localStorage.setItem('theme', 'light');
       themeToggle.textContent = '☀️';
+      if (heroImg) heroImg.src = 'assets/screen1_light.webp';
     }
   });
 
-  // Simulator Data & Logic
+  // ---- Simulator Data ----
   const products = {
     chocolate: {
       title: 'Czekolada z Orzechami',
@@ -55,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'Ciastka "Tajemnicza Receptura"',
       ean: '590000000303',
       allergens: [],
-      dietVegan: null, // missing diet data in OFF
+      dietVegan: null,
       dietVegetarian: null,
       carbs: 60,
       protein: 5,
@@ -65,13 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // State
+  // ---- State ----
   let activeAllergens = new Set(['nuts', 'milk']);
   let activeDiet = 'vegan';
   let targetCal = 2200;
   let selectedProductKey = 'chocolate';
 
-  // DOM Elements
+  // ---- DOM Elements ----
   const allergenChips = document.querySelectorAll('#allergenChips .chip');
   const simRadioCards = document.querySelectorAll('.radio-card');
   const simCalRange = document.getElementById('simCalRange');
@@ -94,22 +119,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const calShare = document.getElementById('calShare');
   const calBar = document.getElementById('calBar');
 
-  // Handlers: Allergen Chips Toggle
+  // ---- Allergen Chips Toggle ----
   allergenChips.forEach(chip => {
     chip.addEventListener('click', () => {
       const allergen = chip.dataset.allergen;
       if (activeAllergens.has(allergen)) {
         activeAllergens.delete(allergen);
         chip.classList.remove('active');
+        chip.setAttribute('aria-pressed', 'false');
       } else {
         activeAllergens.add(allergen);
         chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
       }
       runSimulation();
     });
   });
 
-  // Handlers: Diet Radios
+  // ---- Diet Radios ----
   simRadioCards.forEach(card => {
     card.addEventListener('click', () => {
       simRadioCards.forEach(c => c.classList.remove('active'));
@@ -121,18 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Handlers: Calorie Range
+  // ---- Calorie Range ----
   simCalRange.addEventListener('input', (e) => {
     targetCal = parseInt(e.target.value, 10);
     calValDisplay.textContent = `${targetCal} kcal`;
     runSimulation();
   });
 
-  // Handlers: Product Cards
+  // ---- Product Cards ----
   prodCards.forEach(card => {
     card.addEventListener('click', () => {
-      prodCards.forEach(c => c.classList.remove('active'));
+      prodCards.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-selected', 'false');
+      });
       card.classList.add('active');
+      card.setAttribute('aria-selected', 'true');
       selectedProductKey = card.dataset.prod;
       triggerScanAnimation();
     });
@@ -155,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resEan.textContent = prod.ean;
     resTitle.textContent = prod.title;
 
-    // Check Allergen Conflicts
+    // Allergen conflict check
     const foundAllergens = prod.allergens.filter(a => activeAllergens.has(a));
     let status = 'SAFE';
     let reasonText = 'Produkt bezpieczny — brak konfliktu z wybranymi alergenami i dietą.';
@@ -169,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         soy: 'Soję'
       };
       const names = foundAllergens.map(a => allergenNames[a] || a).join(', ');
-      reasonText = `🚨 Wyryto konflikt: produkt zawiera ${names}!`;
+      reasonText = `🚨 Wykryto konflikt: produkt zawiera ${names}!`;
     } else if (activeDiet === 'vegan' && prod.dietVegan === false) {
       status = 'DANGER';
       reasonText = '🚨 Niezgodny z dietą: produkt nie jest wegański.';
@@ -181,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reasonText = '⚠️ Baza Open Food Facts nie posiada zweryfikowanych tagów diety dla tego produktu. Allergen Guard nie zgaduje bezpieczeństwa!';
     }
 
-    // Render Status Pill
+    // Status pill
     if (status === 'SAFE') {
       resBadge.className = 'status-pill pill-safe';
       resBadge.textContent = '✅ SAFE';
@@ -195,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     resReason.textContent = reasonText;
 
-    // Macros Animation
+    // Macros
     carbVal.textContent = `${prod.carbs}g`;
     protVal.textContent = `${prod.protein}g`;
     fatVal.textContent = `${prod.fat}g`;
@@ -208,12 +239,34 @@ document.addEventListener('DOMContentLoaded', () => {
     protCircle.setAttribute('stroke-dasharray', `${protPercent}, 100`);
     fatCircle.setAttribute('stroke-dasharray', `${fatPercent}, 100`);
 
-    // Energy Goal Share
+    // Energy goal
     const energyPercent = ((prod.kcal / targetCal) * 100).toFixed(1);
     calShare.textContent = `${energyPercent}% celu (${prod.kcal} kcal)`;
     calBar.style.width = `${Math.min(100, energyPercent)}%`;
+
+    // Update aria on progress bar
+    const progressTrack = calBar.closest('.progress-track');
+    if (progressTrack) {
+      progressTrack.setAttribute('aria-valuenow', energyPercent);
+    }
   }
 
-  // Initial Run
+  // ---- Intersection Observer: Animate on Scroll ----
+  const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.feature-card, .gallery-item, .step-card, .privacy-card').forEach(el => {
+    el.classList.add('fade-in-up');
+    fadeObserver.observe(el);
+  });
+
+  // Initial simulation run
   runSimulation();
 });

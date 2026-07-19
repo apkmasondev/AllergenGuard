@@ -8,12 +8,13 @@
   <meta name="keywords" content="alergeny, dieta, skanowanie kodów, weganizm, bezglutenowe, Open Food Facts, Android, Jetpack Compose, prywatność">
   <meta name="author" content="apkmasondev">
   <meta name="theme-color" content="#0d1117">
+  <link rel="canonical" href="https://apkmasondev.github.io/AllergenGuard_apk/">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
 
-  <!-- Preload Critical Resources -->
-  <link rel="preload" href="styles.css" as="style">
-  <link rel="preload" href="assets/screen1.webp" as="image">
+  <!-- Preload hero image (LCP candidate) -->
+  <link rel="preload" href="assets/screen1.webp" as="image" type="image/webp">
 
-  <!-- Stylesheet -->
+  <!-- Stylesheet — single render-blocking CSS is fine per CWV; no need to preload it too -->
   <link rel="stylesheet" href="styles.css">
 
   <!-- Open Graph / Social Media -->
@@ -22,6 +23,7 @@
   <meta property="og:title" content="Allergen & Diet Guard — Twój Osobisty Strażnik Diety">
   <meta property="og:description" content="Skanuj kody kreskowe, sprawdzaj alergeny i ślady śladowe, analizuj makroskładniki bez wysyłania danych na zewnątrz.">
   <meta property="og:image" content="https://apkmasondev.github.io/AllergenGuard_apk/assets/screen1.webp">
+  <meta property="og:locale" content="pl_PL">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -47,63 +49,76 @@
     "softwareVersion": "1.0.0",
     "author": {
       "@type": "Organization",
-      "name": "apkmasondev"
+      "name": "apkmasondev",
+      "url": "https://github.com/apkmasondev"
     }
   }
   </script>
 </head>
 <body>
+  <!-- Skip Navigation Link (WCAG) -->
+  <a href="#main-content" class="skip-link">Przejdź do treści głównej</a>
+
   <!-- Header Navbar -->
-  <header class="navbar">
+  <header class="navbar" role="banner">
     <div class="nav-container">
-      <a href="#" class="brand-logo">
-        <span class="logo-shield">🛡️</span>
-        <span class="brand-title">Allergen <span class="brand-accent">&</span> Diet Guard</span>
+      <a href="#" class="brand-logo" aria-label="Allergen & Diet Guard — strona główna">
+        <span class="logo-shield" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <span class="brand-title">Allergen <span class="brand-accent">&amp;</span> Diet Guard</span>
       </a>
-      <nav class="nav-menu" id="navMenu">
+
+      <!-- Mobile hamburger -->
+      <button id="navToggle" class="nav-hamburger" aria-label="Otwórz menu nawigacji" aria-expanded="false" aria-controls="navMenu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+      <nav class="nav-menu" id="navMenu" role="navigation" aria-label="Menu główne">
+        <a href="#jak-to-dziala" class="nav-link">Jak to działa</a>
         <a href="#symulator" class="nav-link">Symulator EAN</a>
         <a href="#funkcje" class="nav-link">Funkcje</a>
         <a href="#galeria" class="nav-link">Galeria</a>
         <a href="#prywatnosc" class="nav-link">Prywatność</a>
       </nav>
       <div class="nav-actions">
-        <button id="themeToggle" class="btn-icon" aria-label="Zmień motyw">🌙</button>
-        <a href="https://github.com/apkmasondev/AllergenGuard_apk" class="btn btn-outline nav-btn" target="_blank" rel="noopener">GitHub</a>
+        <button id="themeToggle" class="btn-icon" aria-label="Przełącz motyw jasny/ciemny"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+        <a href="https://github.com/apkmasondev/AllergenGuard_apk" class="btn btn-outline nav-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="assets/AllergenGuard_MVP.apk" class="btn btn-primary nav-btn" download>Pobierz APK</a>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero-section" aria-labelledby="hero-heading">
       <div class="hero-container">
         <div class="hero-content">
           <div class="hero-badge">
-            <span class="badge-dot"></span> 100% Offline Profile & Room DB
+            <span class="badge-dot" aria-hidden="true"></span> 100% Offline &amp; Room DB
           </div>
-          <h1 class="hero-title">Twoja Dieta. Twoje Alergie. <span class="text-gradient">Zero Zgadywania.</span></h1>
+          <h1 id="hero-heading" class="hero-title">Twoja Dieta. Twoje Alergie. <span class="text-gradient">Zero Zgadywania.</span></h1>
           <p class="hero-description">
             Skanuj kody kreskowe i natychmiast sprawdzaj alergeny, ślady oraz diety 100% offline. Bez rejestracji i bez wysyłania Twoich danych.
           </p>
 
           <div class="hero-cta-group">
             <a href="assets/AllergenGuard_MVP.apk" class="btn btn-primary btn-hero" download>
-              <span class="btn-icon">📥</span> Pobierz APK (Android)
+              <span aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></span> Pobierz APK (Android)
             </a>
-            <a href="https://github.com/apkmasondev/AllergenGuard_apk" class="btn btn-secondary btn-hero" target="_blank" rel="noopener">
-              <span class="btn-icon">⚡</span> Zobacz Kod na GitHub
+            <a href="https://github.com/apkmasondev/AllergenGuard_apk" class="btn btn-secondary btn-hero" target="_blank" rel="noopener noreferrer">
+              <span aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span> Zobacz Kod na GitHub
             </a>
           </div>
 
           <div class="hero-metrics">
             <div class="metric-item">
               <span class="metric-value">0%</span>
-              <span class="metric-label">Śledzenia & Rejestracji</span>
+              <span class="metric-label">Śledzenia &amp; Rejestracji</span>
             </div>
             <div class="metric-item">
               <span class="metric-value">0</span>
-              <span class="metric-label">Uprawnień do Kamery (ML Kit)</span>
+              <span class="metric-label">Uprawnień do Kamery</span>
             </div>
             <div class="metric-item">
               <span class="metric-value">100%</span>
@@ -114,17 +129,16 @@
 
         <div class="hero-visual">
           <div class="device-frame">
-            <div class="screen-glow"></div>
-            <img src="assets/screen1.webp" alt="Ekran analizy produktu w aplikacji Allergen Guard" class="device-screen" width="360" height="780">
-            <div class="floating-tag tag-safe">
-              <span class="tag-icon">✅</span>
+            <img id="heroImage" src="assets/screen1.webp" alt="Ekran analizy produktu w aplikacji Allergen Guard pokazujący status SAFE i makroskładniki" class="device-screen" width="360" height="780" fetchpriority="high">
+            <div class="floating-tag tag-safe" aria-hidden="true">
+              <span class="tag-icon"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
               <div>
                 <strong>Status SAFE</strong>
                 <small>Brak wykrytych alergenów</small>
               </div>
             </div>
-            <div class="floating-tag tag-macro">
-              <span class="tag-icon">📊</span>
+            <div class="floating-tag tag-macro" aria-hidden="true">
+              <span class="tag-icon"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-4"/></svg></span>
               <div>
                 <strong>Makroskładniki</strong>
                 <small>Węglowodany, Białka, Tłuszcze</small>
@@ -135,14 +149,44 @@
       </div>
     </section>
 
+    <!-- How It Works — 3 Steps (Required by AGENTS-landing-page.md) -->
+    <section id="jak-to-dziala" class="steps-section" aria-labelledby="steps-heading">
+      <div class="section-container">
+        <div class="section-header text-center">
+          <span class="section-tag">Jak to działa</span>
+          <h2 id="steps-heading" class="section-title">3 Proste Kroki do Bezpiecznego Posiłku</h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number" aria-hidden="true">1</div>
+            <h3>Zdefiniuj profil</h3>
+            <p>Wybierz alergeny, dietę (wegańska, wegetariańska, bezglutenowa) i ustal cel kaloryczny. Profil zostaje na Twoim telefonie.</p>
+          </div>
+          <div class="step-arrow" aria-hidden="true">→</div>
+          <div class="step-card">
+            <div class="step-number" aria-hidden="true">2</div>
+            <h3>Skanuj kod kreskowy</h3>
+            <p>Skieruj telefon na kod EAN/UPC produktu. Skaner Google ML Kit działa bez uprawnień kamery.</p>
+          </div>
+          <div class="step-arrow" aria-hidden="true">→</div>
+          <div class="step-card">
+            <div class="step-number" aria-hidden="true">3</div>
+            <h3>Otrzymaj werdykt</h3>
+            <p>Natychmiast widzisz status SAFE, DANGER lub UNKNOWN wraz z makroskładnikami i udziałem energetycznym w celu kalorycznym.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Interactive EAN Scanner Simulator -->
-    <section id="symulator" class="simulator-section">
+    <section id="symulator" class="simulator-section" aria-labelledby="sim-heading">
       <div class="section-container">
         <div class="section-header text-center">
           <span class="section-tag">Wypróbuj bez instalacji</span>
-          <h2 class="section-title">Interaktywny Symulator Skanera EAN</h2>
+          <h2 id="sim-heading" class="section-title">Interaktywny Symulator Skanera EAN</h2>
           <p class="section-subtitle">
-            Zdefiniuj testowy profil użytkownika i zobacz, jak algorytm Allergen & Diet Guard wylicza werdykt w czasie rzeczywistym.
+            Zdefiniuj testowy profil użytkownika i zobacz, jak algorytm Allergen &amp; Diet Guard wylicza werdykt w czasie rzeczywistym.
           </p>
         </div>
 
@@ -152,57 +196,56 @@
             <h3>1. Skonfiguruj Twój Profil</h3>
 
             <div class="sim-group">
-              <label class="sim-label">Wybierz Alergeny:</label>
-              <div class="sim-chips" id="allergenChips">
-                <button type="button" class="chip active" data-allergen="nuts">🥜 Orzechy</button>
-                <button type="button" class="chip active" data-allergen="milk">🥛 Laktoza / Mleko</button>
-                <button type="button" class="chip" data-allergen="gluten">🌾 Gluten</button>
-                <button type="button" class="chip" data-allergen="soy">🫘 Soja</button>
+              <label class="sim-label" id="allergen-label">Wybierz Alergeny:</label>
+              <div class="sim-chips" id="allergenChips" role="group" aria-labelledby="allergen-label">
+                <button type="button" class="chip active" data-allergen="nuts" aria-pressed="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/></svg> Orzechy</button>
+                <button type="button" class="chip active" data-allergen="milk" aria-pressed="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 2h8l2 4v16H6V6z"/><path d="M6 6h12"/><path d="M10 12h4"/></svg> Laktoza / Mleko</button>
+                <button type="button" class="chip" data-allergen="gluten" aria-pressed="false"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 22l10-10M12 12a4 4 0 0 0 4-4M16 8a4 4 0 0 0 4-4M12 12a4 4 0 0 1 4 4M16 16a4 4 0 0 1 4 4M8 16a4 4 0 0 0-4 4M12 12a4 4 0 0 0-4 4"/></svg> Gluten</button>
+                <button type="button" class="chip" data-allergen="soy" aria-pressed="false"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M10 2c-4.4 0-8 3.6-8 8s5.4 12 12 12 8-3.6 8-8-5.4-12-12-12z"/><path d="M7 11c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg> Soja</button>
               </div>
             </div>
 
             <div class="sim-group">
-              <label class="sim-label">Wybierz Dietę:</label>
-
-              <div class="sim-radio-group">
+              <label class="sim-label" id="diet-label">Wybierz Dietę:</label>
+              <div class="sim-radio-group" role="radiogroup" aria-labelledby="diet-label">
                 <label class="radio-card">
                   <input type="radio" name="simDiet" value="none">
                   <span>Brak diety</span>
                 </label>
                 <label class="radio-card active">
                   <input type="radio" name="simDiet" value="vegan" checked>
-                  <span>🌱 Wegańska</span>
+                  <span><svg class="icon-svg" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg> Wegańska</span>
                 </label>
                 <label class="radio-card">
                   <input type="radio" name="simDiet" value="vegetarian">
-                  <span>🧀 Wegetariańska</span>
+                  <span><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><circle cx="8" cy="10" r="1"/><circle cx="15" cy="14" r="1.5"/><circle cx="10" cy="16" r="1"/></svg> Wegetariańska</span>
                 </label>
               </div>
             </div>
 
             <div class="sim-group">
-              <label class="sim-label">Cel Kaloryczny: <span id="calVal">2200 kcal</span></label>
-              <input type="range" id="simCalRange" min="1000" max="4000" value="2200" step="100">
+              <label class="sim-label" for="simCalRange">Cel Kaloryczny: <span id="calVal">2200 kcal</span></label>
+              <input type="range" id="simCalRange" min="1000" max="4000" value="2200" step="100" aria-label="Cel kaloryczny w kcal">
             </div>
 
             <h3>2. Wybierz Produkt do Skanu</h3>
-            <div class="product-selector">
-              <button type="button" class="prod-card active" data-prod="chocolate">
-                <span class="prod-emoji">🍫</span>
+            <div class="product-selector" role="listbox" aria-label="Lista produktów do symulacji">
+              <button type="button" class="prod-card active" data-prod="chocolate" role="option" aria-selected="true">
+                <span class="prod-emoji" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><path d="M4 12h16M12 4v16"/></svg></span>
                 <div>
                   <strong>Czekolada z Orzechami</strong>
                   <small>EAN: 590000000101</small>
                 </div>
               </button>
-              <button type="button" class="prod-card" data-prod="oatmilk">
-                <span class="prod-emoji">🥛</span>
+              <button type="button" class="prod-card" data-prod="oatmilk" role="option" aria-selected="false">
+                <span class="prod-emoji" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 2h8l2 4v16H6V6z"/><path d="M6 6h12"/><path d="M10 12h4"/></svg></span>
                 <div>
                   <strong>Napój Owsiany Bio</strong>
                   <small>EAN: 590000000202</small>
                 </div>
               </button>
-              <button type="button" class="prod-card" data-prod="cookies">
-                <span class="prod-emoji">🍪</span>
+              <button type="button" class="prod-card" data-prod="cookies" role="option" aria-selected="false">
+                <span class="prod-emoji" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="11" r="1"/><circle cx="11" cy="15" r="1"/><circle cx="16" cy="16" r="1"/></svg></span>
                 <div>
                   <strong>Ciastka "Tajemnicza Receptura"</strong>
                   <small>EAN: 590000000303 (Brak tagów)</small>
@@ -211,29 +254,28 @@
             </div>
 
             <button id="btnRunSim" class="btn btn-primary btn-full">
-              <span class="btn-icon">⚡</span> Symuluj Skanowanie EAN
+              <span aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span> Symuluj Skanowanie EAN
             </button>
           </div>
 
           <!-- Simulator Screen Right -->
           <div class="sim-panel sim-display">
-            <div class="scanner-viewport">
-              <div class="scan-laser" id="scanLaser"></div>
-              <div class="scan-frame-corners"></div>
+            <div class="scanner-viewport" role="region" aria-label="Wynik symulacji skanowania" aria-live="polite">
+              <div class="scan-laser" id="scanLaser" aria-hidden="true"></div>
 
               <!-- Result Overlay -->
-              <div id="simResult" class="sim-result-card result-danger">
+              <div id="simResult" class="sim-result-card">
                 <div class="status-header">
-                  <span id="resBadge" class="status-pill pill-danger">🚨 DANGER</span>
+                  <span id="resBadge" class="status-pill pill-danger"><svg class="icon-svg" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg> DANGER</span>
                   <span id="resEan" class="ean-code">590000000101</span>
                 </div>
                 <h4 id="resTitle" class="res-product-title">Czekolada z Orzechami</h4>
                 <p id="resReason" class="res-reason">Wykryto Orzechy Laskowe oraz śladowe ilości mleka!</p>
 
-                <!-- Macro circles demo -->
+                <!-- Macro circles -->
                 <div class="macro-row">
                   <div class="macro-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
+                    <svg viewBox="0 0 36 36" class="circular-chart" role="img" aria-label="Węglowodany">
                       <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                       <path id="carbCircle" class="circle circle-carb" stroke-dasharray="45, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                     </svg>
@@ -241,7 +283,7 @@
                     <small>Węgle</small>
                   </div>
                   <div class="macro-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
+                    <svg viewBox="0 0 36 36" class="circular-chart" role="img" aria-label="Białko">
                       <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                       <path id="protCircle" class="circle circle-prot" stroke-dasharray="12, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                     </svg>
@@ -249,7 +291,7 @@
                     <small>Białko</small>
                   </div>
                   <div class="macro-circle">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
+                    <svg viewBox="0 0 36 36" class="circular-chart" role="img" aria-label="Tłuszcz">
                       <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                       <path id="fatCircle" class="circle circle-fat" stroke-dasharray="35, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                     </svg>
@@ -263,7 +305,7 @@
                     <span>Energia (540 kcal / 100g)</span>
                     <strong id="calShare">24.5% celu</strong>
                   </div>
-                  <div class="progress-track">
+                  <div class="progress-track" role="progressbar" aria-valuenow="24.5" aria-valuemin="0" aria-valuemax="100" aria-label="Udział energetyczny w celu kalorycznym">
                     <div id="calBar" class="progress-fill" style="width: 24.5%;"></div>
                   </div>
                 </div>
@@ -275,169 +317,168 @@
     </section>
 
     <!-- Key Distinguishers Section -->
-    <section id="funkcje" class="features-section">
+    <section id="funkcje" class="features-section" aria-labelledby="features-heading">
       <div class="section-container">
         <div class="section-header text-center">
           <span class="section-tag">Dlaczego Allergen Guard?</span>
-          <h2 class="section-title">Technologia w Służbie Zdrowia i Prywatności</h2>
+          <h2 id="features-heading" class="section-title">Technologia w Służbie Zdrowia i Prywatności</h2>
           <p class="section-subtitle">Stworzona w Kotlinie i Jetpack Compose z myślą o pełnym bezpieczeństwie danych.</p>
         </div>
 
         <div class="features-grid">
           <div class="feature-card">
-            <div class="feature-icon-wrapper icon-emerald">
-              <span>🔒</span>
+            <div class="feature-icon-wrapper icon-emerald" aria-hidden="true">
+              <span><svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
             </div>
             <h3>100% Prywatności i Local Room</h3>
-            <p>
-              Wszystkie Twoje dane profilowe, wybrane alergeny, cele diety i historia skanów pozostają wyłącznie na urządzeniu. Brak jakichkolwiek serwerów śledzących.
-            </p>
+            <p>Wszystkie Twoje dane profilowe, wybrane alergeny, cele diety i historia skanów pozostają wyłącznie na urządzeniu.</p>
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon-wrapper icon-amber">
-              <span>⚠️</span>
+            <div class="feature-icon-wrapper icon-amber" aria-hidden="true">
+              <span><svg class="icon-svg" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
             </div>
             <h3>Zero Zgadywania Składu</h3>
-            <p>
-              Jeśli w bazie Open Food Facts brakuje informacji wymaganych przez Twoją dietę, aplikacja jawnie wyświetla stan <strong>UNKNOWN</strong> zamiast fałszywego bezpieczeństwa.
-            </p>
+            <p>Jeśli w bazie Open Food Facts brakuje informacji, aplikacja wyświetla stan <strong>UNKNOWN</strong> zamiast fałszywego bezpieczeństwa.</p>
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon-wrapper icon-cyan">
-              <span>📷</span>
+            <div class="feature-icon-wrapper icon-cyan" aria-hidden="true">
+              <span><svg class="icon-svg" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
             </div>
             <h3>Skaner Bez Uprawnień Kamery</h3>
-            <p>
-              Wykorzystanie Google Code Scanner API (Google Play Services) eliminuje potrzebę nadawania uprawnienia <code>CAMERA</code> w telefonie.
-            </p>
+            <p>Google Code Scanner API eliminuje potrzebę nadawania uprawnienia <code>CAMERA</code> w telefonie.</p>
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon-wrapper icon-purple">
-              <span>🎯</span>
+            <div class="feature-icon-wrapper icon-purple" aria-hidden="true">
+              <span><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
             </div>
-            <h3>Wartości Odżywcze & Cele Kcal</h3>
-            <p>
-              Prezentacja makroskładników w postaci okręgów oraz wyliczanie procentowego udziału w Twoim dziennym celu kalorycznym (1000 – 4000 kcal).
-            </p>
+            <h3>Wartości Odżywcze &amp; Cele Kcal</h3>
+            <p>Makroskładniki w postaci okręgów i procentowy udział w dziennym celu kalorycznym (1000–4000 kcal).</p>
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon-wrapper icon-rose">
-              <span>⚡</span>
+            <div class="feature-icon-wrapper icon-rose" aria-hidden="true">
+              <span><svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
             </div>
             <h3>Szybki Cache Offline</h3>
-            <p>
-              Raz pobrane produkty spożywcze są zapamiętywane lokalnie w bazie Room, umożliwiając błyskawiczny przegląd historii nawet bez dostępu do sieci.
-            </p>
+            <p>Raz pobrane produkty są zapamiętywane lokalnie, umożliwiając przegląd historii bez dostępu do sieci.</p>
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon-wrapper icon-blue">
-              <span>⭐</span>
+            <div class="feature-icon-wrapper icon-blue" aria-hidden="true">
+              <span><svg class="icon-svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
             </div>
             <h3>Ulubione i Filtrowanie</h3>
-            <p>
-              Oznaczaj najczęstsze produkty jako ulubione i błyskawicznie wyszukuj wpisy w historii po kodzie EAN lub nazwie.
-            </p>
+            <p>Oznaczaj produkty jako ulubione i wyszukuj wpisy w historii po kodzie EAN lub nazwie.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Real App Screenshots Gallery -->
-    <section id="galeria" class="gallery-section">
+    <section id="galeria" class="gallery-section" aria-labelledby="gallery-heading">
       <div class="section-container">
         <div class="section-header text-center">
           <span class="section-tag">Zrzuty Ekranu</span>
-          <h2 class="section-title">Interfejs Zaprojektowany z Precyzją</h2>
-          <p class="section-subtitle">Nowoczesny, przejrzysty design w stylu Glassmorphism i wsparciem trybu ciemnego oraz jasnego.</p>
+          <h2 id="gallery-heading" class="section-title">Interfejs Zaprojektowany z Precyzją</h2>
         </div>
 
         <div class="gallery-grid">
           <div class="gallery-item">
-            <img src="assets/screen1.webp" alt="Status SAFE - Wynik analizy" width="300" height="650" loading="lazy">
-            <div class="gallery-caption">Ekran Wyniku — Status SAFE</div>
+            <img src="assets/screen1.webp" alt="Ekran Skanera EAN w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Skaner EAN (Ciemny)</div>
           </div>
           <div class="gallery-item">
-            <img src="assets/screen2.webp" alt="Status DANGER - Ostrzeżenie o alergenie" width="300" height="650" loading="lazy">
-            <div class="gallery-caption">Ekran Wyniku — Status DANGER</div>
+            <img src="assets/screen3.webp" alt="Profil użytkownika z listą alergenów w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Profil Alergenów (Ciemny)</div>
           </div>
           <div class="gallery-item">
-            <img src="assets/screen3.webp" alt="Ekran Skanera EAN" width="300" height="650" loading="lazy">
-            <div class="gallery-caption">Ekran Skanera EAN</div>
+            <img src="assets/screen4.webp" alt="Preferowana dieta i zapotrzebowanie kaloryczne w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Dieta & Kalorie (Ciemny)</div>
           </div>
           <div class="gallery-item">
-            <img src="assets/screen4.webp" alt="Profil Użytkownika i Alergeny" width="300" height="650" loading="lazy">
-            <div class="gallery-caption">Profil i Alergeny</div>
+            <img src="assets/screen5.webp" alt="Wynik analizy z ostrzeżeniem o zagrożeniu w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Zagrożenie (Ciemny)</div>
           </div>
           <div class="gallery-item">
-            <img src="assets/screen5.webp" alt="Konfiguracja Diety i Celu Kalorycznego" width="300" height="650" loading="lazy">
-            <div class="gallery-caption">Dieta & Cel Kaloryczny</div>
+            <img src="assets/screen7.webp" alt="Wartości odżywcze i makroskładniki w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Makroskładniki (Ciemny)</div>
           </div>
           <div class="gallery-item">
-            <img src="assets/screen6.webp" alt="Lokalna Historia Skanów" width="300" height="650" loading="lazy">
-            <div class="gallery-caption">Historia & Ulubione</div>
+            <img src="assets/screen2.webp" alt="Historia wykonanych skanów w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Historia Skanów (Ciemny)</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/screen6.webp" alt="Szczegóły składu produktu w trybie ciemnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Skład Produktu (Ciemny)</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/screen8.webp" alt="Wynik analizy z ostrzeżeniem o zagrożeniu w trybie jasnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Zagrożenie (Jasny)</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/screen9.webp" alt="Szczegóły składu produktu w trybie jasnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Skład Produktu (Jasny)</div>
+          </div>
+          <div class="gallery-item">
+            <img src="assets/screen10.webp" alt="Wartości odżywcze i makroskładniki w trybie jasnym" width="300" height="650" loading="lazy">
+            <div class="gallery-caption">Makroskładniki (Jasny)</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Privacy Commitment Banner -->
-    <section id="prywatnosc" class="privacy-banner-section">
+    <section id="prywatnosc" class="privacy-banner-section" aria-labelledby="privacy-heading">
       <div class="section-container">
         <div class="privacy-card">
           <div class="privacy-content">
-            <h2>Twoje Dane Zdrowotne Należą Do Ciebie</h2>
-            <p>
-              Nie wymagamy zakładać konta, nie prosimy o podanie adresu e-mail i nie zbieramy danych o Twoich alergiach. Wszystko przetwarza Twoje własne urządzenie.
-            </p>
+            <h2 id="privacy-heading">Twoje Dane Zdrowotne Należą Do Ciebie</h2>
+            <p>Nie wymagamy konta, nie prosimy o e-mail i nie zbieramy danych o alergiach. Wszystko przetwarza Twoje urządzenie.</p>
           </div>
-          <div class="privacy-shield-visual">
-            🛡️
-          </div>
+          <div class="privacy-shield-visual" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         </div>
       </div>
     </section>
 
-    <!-- Download Banner CTA -->
-    <section class="download-cta-section">
+    <!-- Download Banner CTA (repeated per guidelines) -->
+    <section class="download-cta-section" aria-labelledby="cta-heading">
       <div class="section-container text-center">
-        <h2>Zadbaj o Swoje Bezpieczeństwo Żywieniowe Już Dziś</h2>
+        <h2 id="cta-heading">Zadbaj o Bezpieczeństwo Żywieniowe Już Dziś</h2>
         <p>Pobierz darmowy plik APK dla systemu Android i przejmij kontrolę nad składem produktów.</p>
         <div class="cta-buttons-flex">
           <a href="assets/AllergenGuard_MVP.apk" class="btn btn-primary btn-large" download>
-            <span>📥</span> Pobierz Allergen Guard APK
+            <span aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></span> Pobierz Allergen Guard APK
           </a>
-          <a href="https://github.com/apkmasondev/AllergenGuard_apk" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
-            <span>⚡</span> Repozytorium GitHub
+          <a href="https://github.com/apkmasondev/AllergenGuard_apk" class="btn btn-secondary btn-large" target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span> Repozytorium GitHub
           </a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- Footer with repeated CTA links (required by AGENTS-landing-page.md) -->
+  <footer class="footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-brand">
-        <span class="footer-logo">🛡️ Allergen & Diet Guard</span>
+        <span class="footer-logo"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Allergen &amp; Diet Guard</span>
         <p>Bezpieczne skanowanie produktów z Open Food Facts.</p>
       </div>
       <div class="footer-links">
-        <a href="https://github.com/apkmasondev/AllergenGuard_apk" target="_blank" rel="noopener">GitHub Repo</a>
-        <a href="llms.txt" target="_blank">AI Metadata (llms.txt)</a>
-        <a href="robots.txt" target="_blank">Robots.txt</a>
+        <a href="assets/AllergenGuard_MVP.apk" download>Pobierz APK</a>
+        <a href="https://github.com/apkmasondev/AllergenGuard_apk" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+        <a href="llms.txt" target="_blank">llms.txt</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Allergen & Diet Guard. Licencja Open Source.</p>
+      <p>&copy; 2026 Allergen &amp; Diet Guard. Licencja Open Source.</p>
     </div>
   </footer>
 
-  <!-- Script -->
+  <!-- Script (deferred — non-blocking) -->
   <script src="app.js" defer></script>
 </body>
 </html>
