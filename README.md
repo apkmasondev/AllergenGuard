@@ -2,13 +2,14 @@
 
 Oficjalny, bezszablonowy landing page dla aplikacji Android **Allergen & Diet Guard**.
 
-Strona została zbudowana jako lekki, statyczny serwis HTML5/CSS3/Vanilla JS z myślą o publikacji w osobnym repozytorium GitHub: `https://github.com/apkmasondev/AllergenGuard.git` (np. poprzez GitHub Pages).
+Strona została zbudowana jako lekki, statyczny serwis HTML5/CSS3/Vanilla JS z myślą o publikacji w repozytorium GitHub: `https://github.com/apkmasondev/AllergenGuard_apk` (poprzez GitHub Pages).
 
 ## Funkcje Strony Landing Page
 - **Bezszablonowy UX**: Zawiera autorski, interaktywny symulator skanera kodów EAN w czasie rzeczywistym.
-- **Szybkość i Core Web Vitals (2026)**: Brak ciążących frameworków SPA, czysty HTML/CSS/JS, obrazy zoptymalizowane do formatu WebP.
+- **Bezpośrednie Pobieranie APK**: Przycisk pobierania wskazuje bezpośrednio na plik `assets/AllergenGuard_MVP.apk`.
+- **Zoptymalizowane Grafiki**: Wszystkie zrzuty ekranu zostały przemianowane na czytelne nazwy `screen1.webp` – `screen10.webp` oraz skompresowane do formatu WebP.
+- **Szybkość i Core Web Vitals (2026)**: Brak ciążących frameworków SPA, czysty HTML/CSS/JS.
 - **Dostępność i SEO**: Pełne wsparcie WCAG AA, dane strukturalne JSON-LD `SoftwareApplication`, Open Graph, Twitter Cards, plik `llms.txt`, `robots.txt` oraz `sitemap.xml`.
-- **Prezentacja aplikacji**: Sekcja hero z przyciskami CTA (bezpośrednie pobranie APK oraz odnośnik do repozytorium GitHub) oraz galeria ze zrzutami ekranu z prawdziwej aplikacji Android.
 
 ## Struktura Katalogu
 ```text
@@ -19,16 +20,15 @@ landing-page/
 ├── llms.txt          # Podsumowanie i metadane dla robotów i agentów AI
 ├── robots.txt        # Wskazówki dla robotów indeksujących
 ├── sitemap.xml       # Mapa strony dla wyszukiwarek
-└── assets/           # Zoptymalizowane zrzuty ekranu w formacie WebP i JPG
+└── assets/           # Plik APK (AllergenGuard_MVP.apk) oraz screeny (screen1.webp - screen10.webp)
 ```
 
 ## Publikacja na GitHub Pages
-1. Inicjalizacja repozytorium w tym katalogu:
+1. Ustawienie zdalnego repozytorium:
    ```bash
-   git init
-   git remote add origin https://github.com/apkmasondev/AllergenGuard.git
+   git remote set-url origin https://github.com/apkmasondev/AllergenGuard_apk.git
    git add .
-   git commit -m "feat: initial release of Allergen Guard landing page"
-   git push -u origin main
+   git commit -m "fix: update repo URL, download link to assets/AllergenGuard_MVP.apk and shorten screenshot filenames"
+   git push origin main
    ```
-2. W ustawieniach repozytorium GitHub (*Settings -> Pages*) wskaż gałąź `main` jako źródło publikacji.
+2. W ustawieniach repozytorium GitHub (*Settings -> Pages*) wskaż gałąź `main` oraz folder `/ (root)` jako źródło publikacji.
