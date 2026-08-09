@@ -3,9 +3,9 @@
 > Allergen & Diet Guard to nowoczesna, prywatna i bezpłatna aplikacja dla systemu Android służąca do skanowania kodów kreskowych produktów spożywczych oraz automatycznego weryfikowania obecności alergenów, śladowych zanieczyszczeń (traces) i zgodności z wybraną dietą (wegańska, wegetariańska, bezglutenowa).
 
 ## Kluczowe Informacje
-- **Strona domowa**: https://apkmasondev.github.io/AllergenGuard_apk/
+- **Strona domowa**: https://apkmasondev.github.io/AllergenGuard/
 - **Repozytorium GitHub**: https://github.com/apkmasondev/AllergenGuard_apk
-- **Pobieranie APK**: https://apkmasondev.github.io/AllergenGuard_apk/assets/AllergenGuard_MVP.apk
+- **Pobieranie APK**: https://apkmasondev.github.io/AllergenGuard/assets/AllergenGuard-1.0.apk
 - **Platforma**: Android 8.0+ (Jetpack Compose, Kotlin, Single Activity, Hilt, Room DB)
 - **Licencja**: Open Source
 
